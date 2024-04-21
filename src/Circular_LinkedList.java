@@ -23,43 +23,35 @@ public class Circular_LinkedList {
             head = tail = node;
             return;
         }
-//        if (loc == 1){
-//            node.next = head;
-//            head = node;
-//            tail.next = head;
-//            size++;
-//            return;
-//        }
-//        Node cur = head;
-//        for(int i=1; i<=loc-1; i++){
-//            cur = cur.next;
-//        }
-//        node.next = cur.next;
-//        cur.next = node;
-        Node prev = null;
+        if (loc == 1){
+            node.next = head;
+            head = node;
+            tail.next = head;
+            size++;
+            return;
+        }
         Node cur = head;
-        int count = 0;
-        while (cur.next != head){
-            count++;
-            if(count == loc){
-                if (loc == 1){
-                    node.next = head;
-                    head = node;
-                    tail.next = head;
-                    size++;
-                    return;
-                }
-                    prev.next = node;
-                    node.next = cur;
-                    size++;
-
-            }
-            prev = cur;
+        for(int i=1; i<loc-1; i++){
             cur = cur.next;
         }
-        if(count < loc){
-            System.out.println("Location out of bound. Cannot add as the size is: " + size);
-        }
+        node.next = cur.next;
+        cur.next = node;
+//        Node prev = null;
+//        Node cur = head;
+//        int count = 0;
+//        while (cur.next != head){
+//            count++;
+//            if(count == loc){
+//                prev.next = node;
+//                node.next = cur;
+//                size++;
+//            }
+//            prev = cur;
+//            cur = cur.next;
+//        }
+//        if(count < loc){
+//            System.out.println("Location out of bound. Cannot add as the size is: " + size);
+//        }
     }
 
     void delete(){
@@ -76,26 +68,34 @@ public class Circular_LinkedList {
         Node prev = null;
         Node cur = head;
 
-        do{
-            count++;
-            if(count == loc){
-                if (cur == head){
-                    head = head.next;
-                    tail.next = head;
-                    size--;
-                }
-                else {
-                    prev.next = cur.next;
-                    size--;
-                }
-            }
-                prev = cur;
-                cur = cur.next;
-        } while (cur != head);
-
-        if(count < loc){
-            System.out.println("Location out of bound. Cannot delete as the size is: " + size);
+        if (loc == 1){
+            head = head.next;
+            tail.next = head;
+            size--;
+            return;
         }
+
+        for(int i=0; i<loc-1; i++){
+            prev = cur;
+            cur = cur.next;
+        }
+        prev.next = cur.next;
+        size--;
+
+
+//        do{
+//            count++;
+//            if(count == loc){
+//              prev.next = cur.next;
+//            size--;
+//            }
+//                prev = cur;
+//                cur = cur.next;
+//        } while (cur != head);
+
+//        if(count < loc){
+//            System.out.println("Location out of bound. Cannot delete as the size is: " + size);
+//        }
     }
 
     void deleteByData(int data){
@@ -106,7 +106,7 @@ public class Circular_LinkedList {
         }
         Node prev = null;
         Node cur = head;
-        while (cur!=null){
+        while (cur.next != head){
             if (cur.data == data){
                 prev.next = cur.next;
             }
@@ -118,20 +118,18 @@ public class Circular_LinkedList {
     void search(int val){
         Node cur = head;
         int index = 0;
-        boolean found = false;
 
         do {
             index++;
             if(cur.data == val){
                 System.out.println("Value " +cur.data +" found at: " +index);
-                found = true;
+                return;
             }
             cur = cur.next;
         }while (cur != head);
 
-        if (!found){
             System.out.println("Value not Found");
-        }
+
     }
 
     public void DeletingDuplicates(int value){
@@ -145,17 +143,17 @@ public class Circular_LinkedList {
             tail.next = head;
         }
 
-        Node prevNode=head;
-        Node currentNode=head.next;
+        Node prev = head;
+        Node cur = head.next;
 
-        while(currentNode != head){
-            if(currentNode.data == value){
-                prevNode.next = currentNode.next;
-                currentNode = currentNode.next;
+        while(cur != head){
+            if(cur.data == value){
+                prev.next = cur.next;
+                cur = cur.next;
             }
             else {
-                prevNode = prevNode.next;
-                currentNode = currentNode.next;
+                prev = prev.next;
+                cur = cur.next;
             }
         }
     }
@@ -188,9 +186,9 @@ public class Circular_LinkedList {
 //         circular.display();
 //
 //         System.out.println(circular.size);
-//         circular.deleteAtSpecificPosition(4);
-//         circular.display();
+         circular.deleteAtSpecificPosition(1);
+         circular.display();
 //
-//         circular.search(3);
+         circular.search(4);
     }
 }

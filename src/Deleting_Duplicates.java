@@ -1,6 +1,6 @@
 package Circular_LinkedList;
 
-public class linked {
+public class Deleting_Duplicates{
 
         static Node head;
         static Node tail;
@@ -59,7 +59,7 @@ public class linked {
         }
 
         public static void main(String[] args) {
-            linked linked = new linked();
+            Deleting_Duplicates linked = new Deleting_Duplicates();
             linked.InsertAtEnd(3);
             linked.InsertAtEnd(3);
             linked.InsertAtEnd(3);
